@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
 import { DatadogTraceModule } from 'nestjs-ddtrace';
+import { HealthModule } from './health/health.module';
 
 @Module({
-  imports: [DatadogTraceModule.forRoot()],
-  controllers: [],
-  providers: [],
+  imports: [HealthModule, DatadogTraceModule.forRoot()],
 })
 export class AppModule {}
