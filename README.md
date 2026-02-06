@@ -20,6 +20,10 @@ A documentação do projeto está organizada no diretório [`/docs`](./docs) e d
   - [`architecture.md`](./docs/architecture.md)
     Apresenta o desenho de arquitetura da aplicação, responsabilidades das camadas e principais trade-offs arquiteturais.
 
+- **Infraestrutura**
+  - [`infrastructure.md`](./docs/infrastructure.md)
+    Detalha a decisão de utilizar Docker e Docker Compose, benefícios, trade-offs e como isso se encaixa na estratégia de desenvolvimento e implantação.
+
 ---
 
 ## 🚧 Status do Projeto
@@ -44,5 +48,7 @@ A documentação do projeto está organizada no diretório [`/docs`](./docs) e d
 ![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=Prettier&logoColor=white)
 ![ESLint](https://img.shields.io/badge/ESLint-4B32A8?style=for-the-badge&logo=ESLint&logoColor=white)
 ![Markdown](https://img.shields.io/badge/Markdown-000000?style=for-the-badge&logo=markdown&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
+![Docker Compose](https://img.shields.io/badge/Docker%20Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
 ---
