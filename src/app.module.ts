@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
+import { DatadogTraceModule } from 'nestjs-ddtrace';
 
 @Module({
-  imports: [],
+  imports: [DatadogTraceModule.forRoot()],
   controllers: [],
   providers: [],
 })
