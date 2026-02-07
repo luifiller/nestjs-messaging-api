@@ -1,0 +1,45 @@
+services:
+  dev:
+    profiles: [ "development" ]
+    build:
+      context: .
+      cache_from:
+        - node:20-alpine
+      target: production
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      DD_ENV: development
+      DD_SERVICE: nestjs-messaging-api
+      DD_AGENT_HOST: host.docker.internal
+
+  staging:
+    profiles: [ "staging" ]
+    build:
+      context: .
+      cache_from:
+        - node:20-alpine
+      target: production
+    ports:
+      - "3001:3000"
+    environment:
+      NODE_ENV: staging
+      DD_ENV: staging
+      DD_SERVICE: nestjs-messaging-api
+      DD_AGENT_HOST: host.docker.internal
+
+  prod:
+    profiles: [ "production" ]
+    build:
+      context: .
+      cache_from:
+        - node:20-alpine
+      target: production
+    ports:
+      - "3002:3000"
+    environment:
+      NODE_ENV: production
+      DD_ENV: production
+      DD_SERVICE: nestjs-messaging-api
+      DD_AGENT_HOST: host.docker.internal
