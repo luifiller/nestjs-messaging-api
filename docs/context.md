@@ -42,14 +42,13 @@ O projeto foi confeccionado como um sistema orgânico, preparado para crescer, s
 ### Requisitos Funcionais
 
 - Criar uma nova mensagem
-  - ==CONFIRMAR== - Sempre que uma mensagem for criada, ela deve ser persistida com o status `enviado`.
+  - Sempre que uma mensagem for criada, ela deve ser persistida inicialmente com o status `enviado`.
 - Buscar mensagem por ID
 - Buscar mensagens por remetente
 - Buscar mensagens por período
 - Atualizar status de uma mensagem
-  - ==CONFIRMAR== - Permitir a transição de status de uma mensagem (`enviado` → `recebido` → `lido`)
-- Garantir estados válidos para o status da mensagem
-- Retornar erros apropriados para cenários inválidos
+  - Permitir apenas a transição sequencial de status de uma mensagem (`enviado` → `recebido` → `lido`)
+- Garantir estados válidos para o status da mensagem, bloqueando transições inválidas ou regressões de status
 
 ---
 

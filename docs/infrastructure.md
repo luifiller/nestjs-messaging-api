@@ -10,7 +10,7 @@ Além disso, a abordagem prepara o terreno para uma futura orquestração em amb
 
 ## Ambientes
 
-Em todos os ambientes (development, staging e production), a aplicação é executada a partir da mesma imagem Docker, garantindo consistência e repodutibilidade do artefato.
+Em todos os ambientes (development, staging e production), a aplicação é executada a partir da mesma imagem Docker, garantindo consistência e reprodutibilidade do artefato.
 
 Assim, com o Docker Compose, é possível:
 

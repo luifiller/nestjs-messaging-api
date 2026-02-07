@@ -24,6 +24,10 @@ A documentação do projeto está organizada no diretório [`/docs`](./docs) e d
   - [`infrastructure.md`](./docs/infrastructure.md)
     Detalha a decisão de utilizar Docker e Docker Compose, benefícios, trade-offs e como isso se encaixa na estratégia de desenvolvimento e implantação.
 
+- **Docker & Docker Compose**
+  - [`docker.md`](./docs/docker.md)
+    Guia completo com instruções e comandos para gerenciar containers e services em todos os ambientes (development, staging, production).
+
 ---
 
 ## 🚧 Status do Projeto
