@@ -3,7 +3,7 @@ import tracer from 'dd-trace';
 tracer.init({
   logInjection: true,
   runtimeMetrics: true,
-  env: process.env.NODE_ENV || 'local',
+  env: process.env.DD_ENV || 'local',
   logger: console,
 });
 

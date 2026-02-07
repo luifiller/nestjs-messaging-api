@@ -25,7 +25,9 @@ async function bootstrap() {
     module.hot.dispose(() => app.close());
   }
 
-  await app.listen(process.env.PORT ?? 3000);
+  const portEnv = process.env.PORT;
+  const port = portEnv !== undefined ? Number(portEnv) : 3000;
+  await app.listen(Number.isNaN(port) ? 3000 : port);
 }
 
 bootstrap();

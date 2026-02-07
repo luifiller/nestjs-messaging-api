@@ -19,9 +19,11 @@ describe('HealthController', () => {
   describe('healthCheck', () => {
     it('should return status ok and timestamp', () => {
       const result = controller.healthCheck();
+      const date = new Date(result.timestamp);
+
       expect(result).toHaveProperty('status', 'ok');
       expect(result).toHaveProperty('timestamp');
-      expect(new Date(result.timestamp)).toBeInstanceOf(Date);
+      expect(date.getTime()).not.toBeNaN();
     });
   });
 });
