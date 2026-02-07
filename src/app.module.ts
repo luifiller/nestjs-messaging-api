@@ -1,8 +1,17 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { DatadogTraceModule } from 'nestjs-ddtrace';
 import { HealthModule } from './health/health.module';
 
 @Module({
-  imports: [HealthModule, DatadogTraceModule.forRoot()],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
+    }),
+    DatadogTraceModule.forRoot(),
+
+    HealthModule,
+  ],
 })
 export class AppModule {}
