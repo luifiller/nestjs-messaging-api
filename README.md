@@ -28,6 +28,10 @@ A documentação do projeto está organizada no diretório [`/docs`](./docs) e d
   - [`docker.md`](./docs/docker.md)
     Guia completo com instruções e comandos para gerenciar containers e services em todos os ambientes (development, staging, production).
 
+- **Autenticação e Segurança**
+  - [`authentication.md`](./docs/authentication.md)
+    Documentação completa do sistema de autenticação implementado, incluindo JWT, Passport, Guards, Strategies e fluxos de autenticação.
+
 ---
 
 ## 🚧 Status do Projeto
