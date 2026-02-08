@@ -91,6 +91,7 @@
       "!**/*.entity.ts",
       "!**/*.interface.ts",
       "!**/*.enum.ts",
+      "!**/*.const.ts",
       "!**/*.spec.ts",
       "!**/main.ts"
     ],
