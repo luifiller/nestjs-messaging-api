@@ -1,7 +1,7 @@
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
-const { 
+const {
   CreateTableCommand,
-  ListTablesCommand 
+  ListTablesCommand,
 } = require('@aws-sdk/client-dynamodb');
 
 const config = {
@@ -18,36 +18,36 @@ const client = new DynamoDBClient(config);
 async function createTables() {
   console.log('🚀 Criando tabelas no DynamoDB...\n');
 
-  // Tabela de mensagens
   const messagesTable = {
-    TableName: 'messages',
+    TableName: process.env.DYNAMODB_TABLE_MESSAGES || 'messages',
     AttributeDefinitions: [
       { AttributeName: 'id', AttributeType: 'S' },
       { AttributeName: 'createdAt', AttributeType: 'N' },
-      { AttributeName: 'userId', AttributeType: 'S' },
+      { AttributeName: 'sender', AttributeType: 'S' },
+      { AttributeName: 'entity', AttributeType: 'S' },
     ],
-    KeySchema: [
-      { AttributeName: 'id', KeyType: 'HASH' },
-      { AttributeName: 'createdAt', KeyType: 'RANGE' },
-    ],
+    KeySchema: [{ AttributeName: 'id', KeyType: 'HASH' }],
     GlobalSecondaryIndexes: [
       {
-        IndexName: 'GSI_UserMessages',
+        // Buscar mensagens por remetente
+        IndexName: 'GSI_SenderMessages',
         KeySchema: [
-          { AttributeName: 'userId', KeyType: 'HASH' },
+          { AttributeName: 'sender', KeyType: 'HASH' },
           { AttributeName: 'createdAt', KeyType: 'RANGE' },
         ],
         Projection: { ProjectionType: 'ALL' },
-        ProvisionedThroughput: {
-          ReadCapacityUnits: 5,
-          WriteCapacityUnits: 5,
-        },
+      },
+      {
+        // Buscar mensagens por período
+        IndexName: 'GSI_CreatedAt',
+        KeySchema: [
+          { AttributeName: 'entity', KeyType: 'HASH' },
+          { AttributeName: 'createdAt', KeyType: 'RANGE' },
+        ],
+        Projection: { ProjectionType: 'ALL' },
       },
     ],
-    ProvisionedThroughput: {
-      ReadCapacityUnits: 5,
-      WriteCapacityUnits: 5,
-    },
+    BillingMode: 'PAY_PER_REQUEST',
   };
 
   try {

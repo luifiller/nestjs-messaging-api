@@ -2,7 +2,7 @@ import './observability/datadog/dd-tracing';
 
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 
 import { AppModule } from './app.module';
 import { DatadogUserInterceptor } from './observability/datadog/interceptor/datadog-user.interceptor';
@@ -12,6 +12,7 @@ declare const module: any;
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: true,
+    bufferLogs: true,
   });
 
   app.useGlobalPipes(
@@ -21,12 +22,14 @@ async function bootstrap() {
   );
 
   app.useGlobalInterceptors(new DatadogUserInterceptor());
+  app.useLogger(new Logger());
 
   const config = new DocumentBuilder()
     .setTitle('NestJS Messaging API')
     .setDescription('API documentation for the NestJS Messaging application')
     .setVersion('1.0')
     .addTag('messaging-api')
+    .addBearerAuth()
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, documentFactory);

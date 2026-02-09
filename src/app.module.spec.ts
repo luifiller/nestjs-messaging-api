@@ -8,6 +8,8 @@ import { AuthModule } from './auth/auth.module';
 import { AuthService } from './auth/service/auth.service';
 import { HealthController } from './health/controller/health.controller';
 import { AuthConfig } from './auth/constant/auth.const';
+import { DynamoDBModule } from './database/dynamodb.module';
+import { MessageModule } from './message/message.module';
 
 jest.mock('fs');
 const mockedFs = fs as jest.Mocked<typeof fs>;
@@ -38,11 +40,16 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
       // Act
       const module: TestingModule = await Test.createTestingModule({
         imports: [
+          AppModule,
           ConfigModule.forRoot({
             isGlobal: true,
             ignoreEnvFile: true,
             load: [
               () => ({
+                AWS_REGION: 'us-east-1',
+                AWS_DYNAMODB_ENDPOINT: 'http://localhost:8000',
+                AWS_ACCESS_KEY_ID: 'fakeAccessKeyId',
+                AWS_SECRET_ACCESS_KEY: 'fakeSecretAccessKey',
                 JWT_PRIVATE_KEY_PATH: 'private.pem',
                 JWT_PUBLIC_KEY_PATH: 'public.pem',
                 JWT_EXPIRES_IN: AuthConfig.JWT.EXPIRE_TIME,
@@ -50,14 +57,17 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ],
           }),
           AuthModule,
+          DynamoDBModule,
           HealthModule,
-          AppModule,
+          MessageModule,
         ],
       }).compile();
 
       // Assert
       expect(module).toBeDefined();
       expect(module.get<AuthModule>(AuthModule)).toBeDefined();
+      expect(module.get<DynamoDBModule>(DynamoDBModule)).toBeDefined();
+      expect(module.get<MessageModule>(MessageModule)).toBeDefined();
       expect(module.get<HealthModule>(HealthModule)).toBeDefined();
       expect(module.get<AppModule>(AppModule)).toBeDefined();
     });
@@ -81,6 +91,10 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
+                AWS_REGION: 'us-east-1',
+                AWS_DYNAMODB_ENDPOINT: 'http://localhost:8000',
+                AWS_ACCESS_KEY_ID: 'fakeAccessKeyId',
+                AWS_SECRET_ACCESS_KEY: 'fakeSecretAccessKey',
                 JWT_PRIVATE_KEY_PATH: 'private.pem',
                 JWT_PUBLIC_KEY_PATH: 'public.pem',
                 JWT_EXPIRES_IN: AuthConfig.JWT.EXPIRE_TIME,
@@ -90,6 +104,8 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
           AuthModule,
           HealthModule,
           AppModule,
+          DynamoDBModule,
+          MessageModule,
         ],
       }).compile();
     });
@@ -110,6 +126,18 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
       const healthController = module.get<HealthController>(HealthController);
       expect(healthController).toBeDefined();
       expect(healthController).toBeInstanceOf(HealthController);
+    });
+
+    it('should import MessageModule', () => {
+      const messageModule = module.get<MessageModule>(MessageModule);
+      expect(messageModule).toBeDefined();
+      expect(messageModule).toBeInstanceOf(MessageModule);
+    });
+
+    it('should import MessageModule', () => {
+      const dynamoDBModule = module.get<DynamoDBModule>(DynamoDBModule);
+      expect(dynamoDBModule).toBeDefined();
+      expect(dynamoDBModule).toBeInstanceOf(DynamoDBModule);
     });
   });
 });

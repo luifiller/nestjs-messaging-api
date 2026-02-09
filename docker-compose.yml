@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   # DynamoDB Local para desenvolvimento
   dynamodb-local:
@@ -8,7 +6,7 @@ services:
     container_name: dynamodb-local
     ports:
       - "8000:8000"
-    command: [ "-jar", "DynamoDBLocal.jar", "-sharedDb", "-cors" ]
+    command: [ "-jar", "DynamoDBLocal.jar", "-sharedDb" ]
     volumes:
       - dynamodb-data:/home/dynamodblocal/data
     networks:
@@ -28,7 +26,7 @@ services:
       DD_ENV: development
       DD_SERVICE: nestjs-messaging-api
       DD_AGENT_HOST: host.docker.internal
-      
+
       JWT_EXPIRES_IN: 3600s
       JWT_PRIVATE_KEY_PATH: ./private.pem
       JWT_PUBLIC_KEY_PATH: ./public.pem
