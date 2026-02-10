@@ -27,27 +27,32 @@ import { MessageResponseDto } from '../dto/message-response.dto';
 import { UpdateMessageStatusReqDto } from '../dto/update-message-status-request.dto';
 import { QueryMessagesRequestDto } from '../dto/query-messages.dto';
 import { Message } from '../interface/message.interface';
+import { MessageConst } from '../constant/message.const';
 
 @ApiTags('Messages')
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 @ApiResponse({
   status: HttpStatus.UNAUTHORIZED,
-  description: 'Unauthorized access.',
+  description: MessageConst.API_DOC.UNAUTHORIZED_RESPONSE,
   example: {
     statusCode: 401,
-    message: 'Unauthorized access.',
-    error: 'Unauthorized',
+    message: MessageConst.API_DOC.UNAUTHORIZED_RESPONSE,
+    error: MessageConst.API_DOC.UNAUTHORIZED,
   },
 })
 @ApiResponse({
   status: HttpStatus.BAD_REQUEST,
-  description: 'Bad request.',
+  description: MessageConst.API_DOC.BAD_REQUEST_RESPONSE,
   example: {
     statusCode: 400,
-    message: 'Bad request.',
-    error: 'Bad Request',
+    message: MessageConst.API_DOC.BAD_REQUEST_RESPONSE,
+    error: MessageConst.API_DOC.BAD_REQUEST_RESPONSE,
   },
+})
+@ApiResponse({
+  status: HttpStatus.INTERNAL_SERVER_ERROR,
+  description: MessageConst.API_DOC.INTERNAL_SERVER_ERROR_RESPONSE,
 })
 @Controller('messages')
 export class MessageController {
@@ -56,10 +61,10 @@ export class MessageController {
   @Post()
   @HttpCode(HttpStatus.CREATED)
   @ApiBody({ type: CreateMessageReqDto })
-  @ApiOperation({ summary: 'Create a new message' })
+  @ApiOperation({ summary: MessageConst.API_DOC.CREATE_DESCRIPTION })
   @ApiResponse({
     status: HttpStatus.CREATED,
-    description: 'The message has been successfully created.',
+    description: MessageConst.API_DOC.CREATE_SUCCESS,
     type: MessageResponseDto,
   })
   async create(
@@ -71,20 +76,23 @@ export class MessageController {
 
   @Get(':id')
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'Get a message by its ID' })
-  @ApiParam({ name: 'id', description: 'The unique identifier of the message' })
+  @ApiOperation({ summary: MessageConst.API_DOC.GET_BY_ID_DESCRIPTION })
+  @ApiParam({
+    name: MessageConst.API_DOC.ID_PARAM,
+    description: MessageConst.API_DOC.ID_PARAM_DESCRIPTION,
+  })
   @ApiResponse({
     status: HttpStatus.OK,
-    description: 'The message has been successfully retrieved.',
+    description: MessageConst.API_DOC.GET_BY_ID_SUCCESS_RESPONSE,
     type: MessageResponseDto,
   })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
-    description: 'Message not found.',
+    description: MessageConst.EXCEPTION_MESSAGES.MESSAGE_NOT_FOUND,
     example: {
       statusCode: 404,
-      message: 'Message with ID 1 not found.',
-      error: 'Not Found',
+      message: MessageConst.EXCEPTION_MESSAGES.MESSAGE_NOT_FOUND,
+      error: MessageConst.API_DOC.NOT_FOUND_RESPONSE,
     },
   })
   async findById(@Param('id') id: string): Promise<MessageResponseDto> {
@@ -93,30 +101,33 @@ export class MessageController {
 
   @Patch(':id/status')
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'Update the status of a message' })
-  @ApiParam({ name: 'id', description: 'The unique identifier of the message' })
+  @ApiOperation({ summary: MessageConst.API_DOC.UPDATE_STATUS_DESCRIPTION })
+  @ApiParam({
+    name: MessageConst.API_DOC.ID_PARAM,
+    description: MessageConst.API_DOC.ID_PARAM_DESCRIPTION,
+  })
   @ApiBody({ type: UpdateMessageStatusReqDto })
   @ApiResponse({
     status: HttpStatus.OK,
-    description: 'The message status has been successfully updated.',
+    description: MessageConst.API_DOC.UPDATE_SUCCESS_RESPONSE,
     type: MessageResponseDto,
   })
   @ApiResponse({
     status: HttpStatus.CONFLICT,
-    description: 'Conflict occurred while updating the message status.',
+    description: MessageConst.API_DOC.UPDATE_CONFLICT_RESPONSE,
     example: {
       statusCode: 409,
-      message: "Message status is already 'READ'",
-      error: 'Conflict',
+      message: MessageConst.API_DOC.UPDATE_STATUS_ALREADY_READ,
+      error: MessageConst.API_DOC.CONFLICT_RESPONSE,
     },
   })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
-    description: 'Message not found.',
+    description: MessageConst.API_DOC.NOT_FOUND_RESPONSE,
     example: {
       statusCode: 404,
-      message: 'Message with ID 1 not found',
-      error: 'Not Found',
+      message: MessageConst.EXCEPTION_MESSAGES.MESSAGE_NOT_FOUND,
+      error: MessageConst.API_DOC.NOT_FOUND_RESPONSE,
     },
   })
   async updateStatus(
@@ -128,10 +139,10 @@ export class MessageController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'Query messages by sender with pagination support' })
+  @ApiOperation({ summary: MessageConst.API_DOC.QUERY_DESCRIPTION })
   @ApiResponse({
     status: HttpStatus.OK,
-    description: 'Messages have been successfully retrieved.',
+    description: MessageConst.API_DOC.QUERY_SUCCESS_RESPONSE,
     type: [MessageResponseDto],
   })
   async queryMessages(

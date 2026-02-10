@@ -12,7 +12,6 @@ import { GetCommand, UpdateCommand, QueryCommand } from '@aws-sdk/lib-dynamodb';
 import { PutItemCommand } from '@aws-sdk/client-dynamodb';
 import { marshall } from '@aws-sdk/util-dynamodb';
 
-import { DYNAMODB_CLIENT } from '../../database/dynamodb.module';
 import { CreateMessageReqDto } from '../dto/create-message-request.dto';
 import { QueryMessagesRequestDto } from '../dto/query-messages.dto';
 import { Message } from '../interface/message.interface';
@@ -21,19 +20,21 @@ import {
   decodeCursor,
   encodeCursor,
 } from '../utils/dynamodb-cursor-transformer/dynamodb-cursor-transformer';
+import { MessageConst } from '../constant/message.const';
+import { EnvVariables } from '../../common/const/env-variables.const';
 
 @Injectable()
 export class MessageRepository {
   private readonly tableName: string;
 
   constructor(
-    @Inject(DYNAMODB_CLIENT)
+    @Inject(EnvVariables.DYNAMODB.CLIENT)
     private readonly dynamoDBClient: DynamoDBDocumentClient,
     private readonly configService: ConfigService,
   ) {
     this.tableName = this.configService.get<string>(
-      'DYNAMODB_TABLE_MESSAGES',
-      'messages',
+      EnvVariables.DYNAMODB.TABLE_MESSAGES,
+      EnvVariables.DYNAMODB.TABLE_NAME,
     );
   }
 
@@ -49,7 +50,7 @@ export class MessageRepository {
       status: MessageStatus.SENT,
       createdAt: now,
       updatedAt: now,
-      entity: 'MESSAGE',
+      entity: MessageConst.ENTITY.MESSAGE,
     };
 
     try {
@@ -164,7 +165,7 @@ export class MessageRepository {
     }
   }
 
-  async update(id: string, newStatus: string): Promise<Message> {
+  async updateStatus(id: string, newStatus: string): Promise<Message> {
     const now = Date.now();
 
     try {
@@ -194,7 +195,7 @@ export class MessageRepository {
       // return unmarshall(result.Attributes || {}) as Message;
     } catch (error) {
       if (error.name === 'ConditionalCheckFailedException') {
-        throw new NotFoundException(`Message with id ${id} not found`);
+        throw new NotFoundException(`Message not found`);
       }
 
       throw new InternalServerErrorException(
