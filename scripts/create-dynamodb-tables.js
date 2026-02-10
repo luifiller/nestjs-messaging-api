@@ -16,7 +16,7 @@ const config = {
 const client = new DynamoDBClient(config);
 
 async function createTables() {
-  console.log('🚀 Criando tabelas no DynamoDB...\n');
+  console.log('Executing create tables script...\n');
 
   const messagesTable = {
     TableName: process.env.DYNAMODB_TABLE_MESSAGES || 'messages',
@@ -29,7 +29,7 @@ async function createTables() {
     KeySchema: [{ AttributeName: 'id', KeyType: 'HASH' }],
     GlobalSecondaryIndexes: [
       {
-        // Buscar mensagens por remetente
+        // Search messages by sender
         IndexName: 'GSI_SenderMessages',
         KeySchema: [
           { AttributeName: 'sender', KeyType: 'HASH' },
@@ -38,7 +38,7 @@ async function createTables() {
         Projection: { ProjectionType: 'ALL' },
       },
       {
-        // Buscar mensagens por período
+        // Search messages by period
         IndexName: 'GSI_CreatedAt',
         KeySchema: [
           { AttributeName: 'entity', KeyType: 'HASH' },
@@ -51,28 +51,27 @@ async function createTables() {
   };
 
   try {
-    console.log('📝 Criando tabela "messages"...');
+    console.log('Creating "messages" table...');
     await client.send(new CreateTableCommand(messagesTable));
-    console.log('✅ Tabela "messages" criada com sucesso!\n');
+    console.log('✅ "messages" table created successfully!\n');
   } catch (error) {
     if (error.name === 'ResourceInUseException') {
-      console.log('⚠️  Tabela "messages" já existe.\n');
+      console.log('⚠️  "messages" table already exists.\n');
     } else {
-      console.error('❌ Erro ao criar tabela "messages":', error.message);
+      console.error('❌ Error creating "messages" table:', error.message);
       throw error;
     }
   }
 
-  // Listar tabelas
-  console.log('📋 Listando tabelas...');
+  // List tables
+  console.log('Listing tables...');
   const listResult = await client.send(new ListTablesCommand({}));
-  console.log('Tabelas encontradas:', listResult.TableNames);
+  console.log('Tables found:', listResult.TableNames);
 
-  console.log('\n✅ Processo concluído com sucesso!');
-  console.log('\n💡 Próximos passos:');
-  console.log('   - Iniciar a aplicação: npm run start:dev');
-  console.log('   - Visualizar dados: npm run dynamodb:admin');
-  console.log('   - Acessar http://localhost:8001 para UI visual\n');
+  console.log('\n✅ Process completed successfully!');
+  console.log('\n Next steps:');
+  console.log('   - Start the application');
+  console.log('   - To view data in UI: npm run dynamodb:admin and access http://localhost:8001');
 }
 
 createTables().catch(console.error);
