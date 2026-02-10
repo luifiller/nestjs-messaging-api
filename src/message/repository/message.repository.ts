@@ -37,12 +37,14 @@ export class MessageRepository {
     );
   }
 
-  async create(createMessageDto: CreateMessageReqDto): Promise<Message> {
+  async create(
+    sender: string,
+    createMessageDto: CreateMessageReqDto,
+  ): Promise<Message> {
     const now = Date.now();
     const message: Message = {
       id: uuidv4(),
-      // TODO - O sender deve ser coletado do token JWT, pensar em como fazer isso de forma clean (ex: criar um decorator @CurrentUser() para extrair essa info do token)
-      sender: 'PENSAR EM COMO COLETAR ESSA INFO',
+      sender,
       content: createMessageDto.content,
       status: MessageStatus.SENT,
       createdAt: now,

@@ -15,8 +15,11 @@ import { Message } from '../interface/message.interface';
 export class MessageService {
   constructor(private readonly messageRepository: MessageRepository) {}
 
-  async create(createMessageDto: CreateMessageReqDto): Promise<Message> {
-    return this.messageRepository.create(createMessageDto);
+  async create(
+    sender: string,
+    createMessageDto: CreateMessageReqDto,
+  ): Promise<Message> {
+    return this.messageRepository.create(sender, createMessageDto);
   }
 
   async findById(id: string): Promise<Message> {

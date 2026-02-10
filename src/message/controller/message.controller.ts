@@ -19,6 +19,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 
+import { CurrentUser } from '../../auth/decorators/current-user.decorator';
 import { JwtAuthGuard } from '../../auth/guards/jwt/jwt.guard';
 import { MessageService } from '../service/message.service';
 import { CreateMessageReqDto } from '../dto/create-message-request.dto';
@@ -62,9 +63,10 @@ export class MessageController {
     type: MessageResponseDto,
   })
   async create(
+    @CurrentUser('username') sender: string,
     @Body() createMessageReqDto: CreateMessageReqDto,
   ): Promise<MessageResponseDto> {
-    return await this.messageService.create(createMessageReqDto);
+    return await this.messageService.create(sender, createMessageReqDto);
   }
 
   @Get(':id')
