@@ -46,8 +46,8 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PRIVATE_KEY_PATH: 'private.pem',
-                JWT_PUBLIC_KEY_PATH: 'public.pem',
+                JWT_PRIVATE_KEY_PATH: './certs/private.pem',
+                JWT_PUBLIC_KEY_PATH: './certs/public.pem',
                 JWT_EXPIRES_IN: AuthConfig.JWT.EXPIRE_TIME,
               }),
             ],
@@ -83,8 +83,8 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PRIVATE_KEY_PATH: 'private.pem',
-                JWT_PUBLIC_KEY_PATH: 'public.pem',
+                JWT_PRIVATE_KEY_PATH: './certs/private.pem',
+                JWT_PUBLIC_KEY_PATH: './certs/public.pem',
                 JWT_EXPIRES_IN: AuthConfig.JWT.EXPIRE_TIME,
               }),
             ],
@@ -114,7 +114,7 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PUBLIC_KEY_PATH: 'public.pem',
+                JWT_PUBLIC_KEY_PATH: './certs/public.pem',
                 JWT_EXPIRES_IN: AuthConfig.JWT.EXPIRE_TIME,
               }),
             ],
@@ -139,7 +139,7 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PRIVATE_KEY_PATH: 'private.pem',
+                JWT_PRIVATE_KEY_PATH: './certs/private.pem',
                 JWT_EXPIRES_IN: AuthConfig.JWT.EXPIRE_TIME,
               }),
             ],
@@ -165,8 +165,8 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PRIVATE_KEY_PATH: 'private.pem',
-                JWT_PUBLIC_KEY_PATH: 'public.pem',
+                JWT_PRIVATE_KEY_PATH: './certs/private.pem',
+                JWT_PUBLIC_KEY_PATH: './certs/public.pem',
                 JWT_EXPIRES_IN: AuthConfig.JWT.EXPIRE_TIME,
               }),
             ],
@@ -192,8 +192,8 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PRIVATE_KEY_PATH: 'private.pem',
-                JWT_PUBLIC_KEY_PATH: 'public.pem',
+                JWT_PRIVATE_KEY_PATH: './certs/private.pem',
+                JWT_PUBLIC_KEY_PATH: './certs/public.pem',
                 JWT_EXPIRES_IN: AuthConfig.JWT.EXPIRE_TIME,
               }),
             ],
@@ -222,8 +222,8 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PRIVATE_KEY_PATH: 'private.pem',
-                JWT_PUBLIC_KEY_PATH: 'public.pem',
+                JWT_PRIVATE_KEY_PATH: './certs/private.pem',
+                JWT_PUBLIC_KEY_PATH: './certs/public.pem',
                 JWT_EXPIRES_IN: AuthConfig.JWT.EXPIRE_TIME,
               }),
             ],
@@ -248,8 +248,8 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PRIVATE_KEY_PATH: 'private.pem',
-                JWT_PUBLIC_KEY_PATH: 'public.pem',
+                JWT_PRIVATE_KEY_PATH: './certs/private.pem',
+                JWT_PUBLIC_KEY_PATH: './certs/public.pem',
                 JWT_EXPIRES_IN: AuthConfig.JWT.EXPIRE_TIME,
               }),
             ],
@@ -283,8 +283,8 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PRIVATE_KEY_PATH: 'private.pem',
-                JWT_PUBLIC_KEY_PATH: 'public.pem',
+                JWT_PRIVATE_KEY_PATH: './certs/private.pem',
+                JWT_PUBLIC_KEY_PATH: './certs/public.pem',
                 JWT_EXPIRES_IN: '3600',
               }),
             ],
@@ -317,8 +317,8 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PRIVATE_KEY_PATH: 'private.pem',
-                JWT_PUBLIC_KEY_PATH: 'public.pem',
+                JWT_PRIVATE_KEY_PATH: './certs/private.pem',
+                JWT_PUBLIC_KEY_PATH: './certs/public.pem',
                 // JWT_EXPIRES_IN not provided
               }),
             ],
@@ -348,8 +348,8 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PRIVATE_KEY_PATH: 'private.pem',
-                JWT_PUBLIC_KEY_PATH: 'public.pem',
+                JWT_PRIVATE_KEY_PATH: './certs/private.pem',
+                JWT_PUBLIC_KEY_PATH: './certs/public.pem',
                 JWT_EXPIRES_IN: '7200',
               }),
             ],
@@ -381,8 +381,8 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PRIVATE_KEY_PATH: 'private.pem',
-                JWT_PUBLIC_KEY_PATH: 'public.pem',
+                JWT_PRIVATE_KEY_PATH: './certs/private.pem',
+                JWT_PUBLIC_KEY_PATH: './certs/public.pem',
                 JWT_EXPIRES_IN: AuthConfig.JWT.EXPIRE_TIME,
               }),
             ],

@@ -28,8 +28,8 @@ services:
       DD_AGENT_HOST: host.docker.internal
 
       JWT_EXPIRES_IN: 3600s
-      JWT_PRIVATE_KEY_PATH: ./private.pem
-      JWT_PUBLIC_KEY_PATH: ./public.pem
+      JWT_PRIVATE_KEY_PATH: ./certs/private.pem
+      JWT_PUBLIC_KEY_PATH: ./certs/public.pem
 
       AWS_REGION: us-east-1
       AWS_DYNAMODB_ENDPOINT: http://dynamodb-local:8000
@@ -57,8 +57,8 @@ services:
       DD_AGENT_HOST: host.docker.internal
 
       JWT_EXPIRES_IN: 3600s
-      JWT_PRIVATE_KEY_PATH: ./private.pem
-      JWT_PUBLIC_KEY_PATH: ./public.pem
+      JWT_PRIVATE_KEY_PATH: ./certs/private.pem
+      JWT_PUBLIC_KEY_PATH: ./certs/public.pem
 
       AWS_REGION: us-east-1
       DYNAMODB_TABLE_MESSAGES: messages-staging

@@ -40,13 +40,14 @@ RUN addgroup -g 1001 -S nodejs && \
     chown -R nestjs:nodejs /app
 
 # Generate JWT RSA key pair
-RUN apk add --no-cache openssl && \
-    openssl genrsa -out private.pem 2048 && \
-    openssl rsa -in private.pem -outform PEM -pubout -out public.pem && \
-    chown nestjs:nodejs private.pem public.pem && \
-    chmod 400 private.pem && \
-    chmod 444 public.pem && \
-    apk del openssl
+RUN apk add --no-cache openssl bash
+COPY scripts/create-pem-keys.sh /usr/local/bin/create-pem-keys.sh
+RUN chmod +x /usr/local/bin/create-pem-keys.sh && \
+    /usr/local/bin/create-pem-keys.sh && \
+    chown nestjs:nodejs certs/private.pem certs/public.pem && \
+    chmod 400 certs/private.pem && \
+    chmod 444 certs/public.pem && \
+    apk del openssl bash
 
 USER nestjs
 

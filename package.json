@@ -14,6 +14,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
+    "dev": "npm run dynamodb:start && npm run start:hot",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/src/main",
     "start:hot": "nest build --webpack --webpackPath webpack-hmr.config.js --watch",
@@ -25,6 +26,9 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "keys:generate": "sh scripts/create-pem-keys.sh",
+    "dynamodb:start": "docker-compose --profile development up dynamodb-local -d",
+    "dynamodb:stop": "docker-compose --profile development down",
     "dynamodb:create-tables": "node scripts/create-dynamodb-tables.js",
     "dynamodb:admin": "dynamodb-admin"
   },
