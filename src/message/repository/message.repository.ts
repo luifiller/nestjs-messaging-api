@@ -20,7 +20,7 @@ import { MessageStatus } from '../enum/message-status.enum';
 import {
   decodeCursor,
   encodeCursor,
-} from '../utils/dynamodb-cursor-transformer';
+} from '../utils/dynamodb-cursor-transformer/dynamodb-cursor-transformer';
 
 @Injectable()
 export class MessageRepository {

@@ -14,7 +14,15 @@ export function AtLeastOneFilter(validationOptions?: ValidationOptions) {
       validator: {
         validate(_: any, args: ValidationArguments) {
           const obj = args.object as any;
-          return !!(obj.sender || (obj.startDate && obj.endDate));
+
+          const hasSender = !!obj.sender && obj.sender.trim().length > 0;
+
+          const hasDateRange = !!(obj.startDate && obj.endDate);
+
+          return hasSender || hasDateRange;
+        },
+        defaultMessage(args: ValidationArguments) {
+          return 'At least one filter must be provided: sender or (startDate and endDate)';
         },
       },
     });

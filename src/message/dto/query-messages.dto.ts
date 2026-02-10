@@ -10,7 +10,7 @@ import {
   IsNotEmpty,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { AtLeastOneFilter } from '../utils/at-least-one-filter';
+import { AtLeastOneFilter } from '../utils/at-least-one-filter/at-least-one-filter';
 
 export class QueryMessagesRequestDto {
   @AtLeastOneFilter({
