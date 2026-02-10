@@ -153,7 +153,6 @@ export class MessageRepository {
 
       return {
         items: (result.Items as Message[]) ?? [],
-        // TODO - O nextCursor não está funcionando corretamente, revisar lógica de cursor
         nextCursor: result.LastEvaluatedKey
           ? encodeCursor(result.LastEvaluatedKey)
           : undefined,

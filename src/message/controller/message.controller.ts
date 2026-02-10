@@ -95,9 +95,7 @@ export class MessageController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Update the status of a message' })
   @ApiParam({ name: 'id', description: 'The unique identifier of the message' })
-  @ApiBody({
-    type: UpdateMessageStatusReqDto,
-  })
+  @ApiBody({ type: UpdateMessageStatusReqDto })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'The message status has been successfully updated.',

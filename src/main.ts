@@ -2,7 +2,7 @@ import './observability/datadog/dd-tracing';
 
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { Logger, ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
 
 import { AppModule } from './app.module';
 import { DatadogUserInterceptor } from './observability/datadog/interceptor/datadog-user.interceptor';
@@ -14,6 +14,11 @@ async function bootstrap() {
     cors: true,
     bufferLogs: true,
   });
+
+  app.enableVersioning({
+    type: VersioningType.URI,
+  });
+  app.setGlobalPrefix('api/v1');
 
   app.useGlobalPipes(
     new ValidationPipe({
