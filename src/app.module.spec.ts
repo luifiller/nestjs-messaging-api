@@ -1,5 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ThrottlerModule } from '@nestjs/throttler';
+import { DatadogTraceModule } from 'nestjs-ddtrace';
 import * as fs from 'fs';
 
 import { AppModule } from './app.module';
@@ -10,6 +12,7 @@ import { HealthController } from './health/controller/health.controller';
 import { AuthConfig } from './auth/constant/auth.const';
 import { DynamoDBModule } from './database/dynamodb.module';
 import { MessageModule } from './message/message.module';
+import { ThrottlerConfig } from './common/config/throttler.config';
 
 jest.mock('fs');
 const mockedFs = fs as jest.Mocked<typeof fs>;
@@ -56,6 +59,16 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
               }),
             ],
           }),
+          ThrottlerModule.forRoot({
+            throttlers: [
+              {
+                ttl: ThrottlerConfig.DEFAULT.TTL,
+                limit: 5, // 5 requests
+              },
+            ],
+          }),
+          DatadogTraceModule.forRoot(),
+
           AuthModule,
           DynamoDBModule,
           HealthModule,
@@ -70,6 +83,8 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
       expect(module.get<MessageModule>(MessageModule)).toBeDefined();
       expect(module.get<HealthModule>(HealthModule)).toBeDefined();
       expect(module.get<AppModule>(AppModule)).toBeDefined();
+      expect(module.get<ThrottlerModule>(ThrottlerModule)).toBeDefined();
+      expect(module.get<DatadogTraceModule>(DatadogTraceModule)).toBeDefined();
     });
   });
 
@@ -101,6 +116,16 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
               }),
             ],
           }),
+          ThrottlerModule.forRoot({
+            throttlers: [
+              {
+                ttl: ThrottlerConfig.DEFAULT.TTL,
+                limit: ThrottlerConfig.DEFAULT.LIMIT,
+              },
+            ],
+          }),
+          DatadogTraceModule.forRoot(),
+
           AuthModule,
           HealthModule,
           AppModule,
