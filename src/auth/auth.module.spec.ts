@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import { InternalServerErrorException } from '@nestjs/common';
 import * as fs from 'fs';
 
 import { AuthModule } from './auth.module';
@@ -212,7 +213,7 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
       // Arrange
       mockedFs.existsSync.mockReturnValue(true);
       mockedFs.readFileSync.mockImplementation(() => {
-        throw new Error('Permission denied');
+        throw new InternalServerErrorException('Permission denied');
       });
 
       const moduleFactory = Test.createTestingModule({

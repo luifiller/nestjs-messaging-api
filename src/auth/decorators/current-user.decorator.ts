@@ -1,4 +1,8 @@
-import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+import {
+  createParamDecorator,
+  ExecutionContext,
+  InternalServerErrorException,
+} from '@nestjs/common';
 
 import { JwtPayloadDto } from '../dto/jwt-payload.dto';
 
@@ -35,11 +39,13 @@ export const CurrentUser = createParamDecorator(
 
     const user = request.user as JwtPayloadDto;
     if (!user) {
-      throw new Error('User not found in request.');
+      throw new InternalServerErrorException('User not found in request.');
     }
 
     if (data && !user?.[data]) {
-      throw new Error(`Property "${data}" does not exist on user payload.`);
+      throw new InternalServerErrorException(
+        `Property "${data}" does not exist on user payload.`,
+      );
     }
 
     return data ? user?.[data] : user;

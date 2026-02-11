@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigService } from '@nestjs/config';
+import { InternalServerErrorException } from '@nestjs/common';
+
 import { JwtKeyProvider } from './jwt-key-provider';
 import { AuthConfig } from '../constant/auth.const';
-
 import * as fs from 'fs';
-import * as path from 'path';
 
 jest.mock('fs');
 
@@ -66,7 +66,7 @@ describe('JwtKeyProvider', () => {
 
       jest.spyOn(fs, 'existsSync').mockReturnValue(true);
       jest.spyOn(fs, 'readFileSync').mockImplementation(() => {
-        throw new Error('permission denied');
+        throw new InternalServerErrorException('permission denied');
       });
 
       expect(() => provider.getPublicKey()).toThrow(

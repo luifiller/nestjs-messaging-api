@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 import { UserLoginDto } from '../dto/user-login.dto';
@@ -62,7 +66,7 @@ export class AuthService {
 
     const token = await this.jwtService.signAsync(payload);
     if (!token) {
-      throw new Error(
+      throw new InternalServerErrorException(
         AuthConfig.API_DOC.LOGIN_TOKEN_GENERATION_FAILURE_RESPONSE,
       );
     }

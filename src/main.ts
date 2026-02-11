@@ -2,10 +2,16 @@ import './observability/datadog/dd-tracing';
 
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
+import {
+  ConsoleLogger,
+  Logger,
+  ValidationPipe,
+  VersioningType,
+} from '@nestjs/common';
 
 import { AppModule } from './app.module';
 import { DatadogUserInterceptor } from './observability/datadog/interceptor/datadog-user.interceptor';
+import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 
 declare const module: any;
 
@@ -13,6 +19,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: true,
     bufferLogs: true,
+    logger: new ConsoleLogger({
+      json: true,
+    }),
   });
 
   app.enableVersioning({
@@ -25,6 +34,8 @@ async function bootstrap() {
       whitelist: true,
     }),
   );
+
+  app.useGlobalFilters(new HttpExceptionFilter());
 
   app.useGlobalInterceptors(new DatadogUserInterceptor());
   app.useLogger(new Logger());
