@@ -3,7 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
 
 import { createDynamoDBClient } from './dynamodb.config';
-import { EnvVariables } from '../common/const/env-variables.const';
+import { EnvVariables } from '../config/environment/env-variables.const';
 
 /**
  * DynamoDB Module
@@ -35,7 +35,7 @@ import { EnvVariables } from '../common/const/env-variables.const';
         if (endpoint) {
           config.endpoint = endpoint;
         }
-        
+
         const accessKeyId = configService.getOrThrow<string>(
           EnvVariables.AWS.ACCESS_KEY_ID,
         );

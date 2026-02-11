@@ -3,11 +3,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { MessageController } from './message.controller';
 import { MessageService } from '../service/message.service';
 import { JwtAuthGuard } from '../../auth/guards/jwt/jwt.guard';
-import { CreateMessageReqDto } from '../dto/create-message-request.dto';
-import { UpdateMessageStatusReqDto } from '../dto/update-message-status-request.dto';
-import { QueryMessagesRequestDto } from '../dto/query-messages.dto';
-import { MessageResponseDto } from '../dto/message-response.dto';
-import { MessageStatus } from '../enum/message-status.enum';
+import { CreateMessageReqDto } from '../dtos/create-message-request.dto';
+import { UpdateMessageStatusReqDto } from '../dtos/update-message-status-request.dto';
+import { QueryMessagesRequestDto } from '../dtos/query-messages.dto';
+import { MessageResponseDto } from '../dtos/message-response.dto';
+import { MessageStatus } from '../enums/message-status.enum';
 
 describe('MessageController', () => {
   let controller: MessageController;

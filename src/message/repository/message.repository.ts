@@ -12,16 +12,16 @@ import { GetCommand, UpdateCommand, QueryCommand } from '@aws-sdk/lib-dynamodb';
 import { PutItemCommand } from '@aws-sdk/client-dynamodb';
 import { marshall } from '@aws-sdk/util-dynamodb';
 
-import { CreateMessageReqDto } from '../dto/create-message-request.dto';
-import { QueryMessagesRequestDto } from '../dto/query-messages.dto';
+import { CreateMessageReqDto } from '../dtos/create-message-request.dto';
+import { QueryMessagesRequestDto } from '../dtos/query-messages.dto';
 import { Message } from '../interface/message.interface';
-import { MessageStatus } from '../enum/message-status.enum';
+import { MessageStatus } from '../enums/message-status.enum';
 import {
   decodeCursor,
   encodeCursor,
 } from '../utils/dynamodb-cursor-transformer/dynamodb-cursor-transformer';
-import { MessageConst } from '../constant/message.const';
-import { EnvVariables } from '../../common/const/env-variables.const';
+import { MessageConst } from '../constants/message.const';
+import { EnvVariables } from '../../infrastructure/config/environment/env-variables.const';
 
 @Injectable()
 export class MessageRepository {

@@ -1,7 +1,8 @@
 import { ExecutionContext } from '@nestjs/common';
 import { ROUTE_ARGS_METADATA } from '@nestjs/common/constants';
+
 import { CurrentUser } from './current-user.decorator';
-import { JwtPayloadDto } from '../dto/jwt-payload.dto';
+import { JwtPayloadDto } from '../../../auth/dtos/jwt-payload.dto';
 
 function getParamDecoratorFactory(decorator: Function) {
   class TestController {

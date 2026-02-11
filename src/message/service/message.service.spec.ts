@@ -7,11 +7,11 @@ import {
 
 import { MessageService } from './message.service';
 import { MessageRepository } from '../repository/message.repository';
-import { CreateMessageReqDto } from '../dto/create-message-request.dto';
-import { UpdateMessageStatusReqDto } from '../dto/update-message-status-request.dto';
-import { QueryMessagesRequestDto } from '../dto/query-messages.dto';
+import { CreateMessageReqDto } from '../dtos/create-message-request.dto';
+import { UpdateMessageStatusReqDto } from '../dtos/update-message-status-request.dto';
+import { QueryMessagesRequestDto } from '../dtos/query-messages.dto';
 import { Message } from '../interface/message.interface';
-import { MessageStatus } from '../enum/message-status.enum';
+import { MessageStatus } from '../enums/message-status.enum';
 
 describe('MessageService', () => {
   let service: MessageService;

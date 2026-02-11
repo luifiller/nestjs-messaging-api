@@ -1,7 +1,7 @@
 import { ExecutionContext, CallHandler } from '@nestjs/common';
 import { of } from 'rxjs';
 
-import { DatadogUserInterceptor } from './datadog-user.interceptor';
+import { DatadogUserInterceptor } from './../../../observability/datadog/interceptor/datadog-user.interceptor';
 import { default as tracer } from '../dd-tracing';
 
 jest.mock('../dd-tracing', () => ({

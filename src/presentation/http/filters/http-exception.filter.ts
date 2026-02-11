@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 
-import { ErrorResponse } from './interface/error-response.interface';
+import { ErrorResponse } from '../interfaces/error-response.interface';
 
 /**
  * Global exception filter that catches all HTTP exceptions

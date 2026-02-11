@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Logger } from '@nestjs/common';
+
 import { HttpExceptionFilter } from './http-exception.filter';
-import { ErrorResponse } from './interface/error-response.interface';
+import { ErrorResponse } from '../interfaces/error-response.interface';
 
 describe('HttpExceptionFilter', () => {
   let filter: HttpExceptionFilter;

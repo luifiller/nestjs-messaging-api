@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
 
-import { AuthConfig } from '../constant/auth.const';
+import { AuthConfig } from '../constants/auth.const';
 
 /**
  * JWT Key Provider

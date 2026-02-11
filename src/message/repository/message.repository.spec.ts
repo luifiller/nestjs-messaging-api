@@ -9,8 +9,8 @@ import { GetCommand, QueryCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
 import { PutItemCommand } from '@aws-sdk/client-dynamodb';
 
 import { MessageRepository } from './message.repository';
-import { MessageStatus } from '../enum/message-status.enum';
-import { EnvVariables } from '../../common/const/env-variables.const';
+import { MessageStatus } from '../enums/message-status.enum';
+import { EnvVariables } from '../../infrastructure/config/environment/env-variables.const';
 
 jest.mock('uuid', () => ({
   v4: jest.fn(() => 'uuid-123'),

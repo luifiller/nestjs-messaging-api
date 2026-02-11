@@ -1,4 +1,4 @@
-import './observability/datadog/dd-tracing';
+import './infrastructure/observability/datadog/dd-tracing';
 
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 
 import { AppModule } from './app.module';
-import { DatadogUserInterceptor } from './observability/datadog/interceptor/datadog-user.interceptor';
+import { DatadogUserInterceptor } from './infrastructure/observability/datadog/interceptor/datadog-user.interceptor';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 
 declare const module: any;

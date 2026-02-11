@@ -6,9 +6,9 @@ import { randomUUID } from 'crypto';
 import { AuthService } from './auth.service';
 import { UserService } from '../../user/user.service';
 import { UserDto } from '../../user/dto/user.dto';
-import { UserLoginDto } from '../dto/user-login.dto';
-import { AccessTokenDto } from '../dto/access-token.dto';
-import { AuthConfig } from '../constant/auth.const';
+import { UserLoginDto } from '../dtos/user-login.dto';
+import { AccessTokenDto } from '../dtos/access-token.dto';
+import { AuthConfig } from '../constants/auth.const';
 
 describe('AuthService', () => {
   let service: AuthService;

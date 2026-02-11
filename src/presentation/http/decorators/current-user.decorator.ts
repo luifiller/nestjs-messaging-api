@@ -4,7 +4,7 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 
-import { JwtPayloadDto } from '../dto/jwt-payload.dto';
+import { JwtPayloadDto } from '../../../auth/dtos/jwt-payload.dto';
 
 /**
  * Custom decorator to extract the current authenticated user from the request

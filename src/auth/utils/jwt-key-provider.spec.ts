@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { InternalServerErrorException } from '@nestjs/common';
 
 import { JwtKeyProvider } from './jwt-key-provider';
-import { AuthConfig } from '../constant/auth.const';
+import { AuthConfig } from '../constants/auth.const';
 import * as fs from 'fs';
 
 jest.mock('fs');

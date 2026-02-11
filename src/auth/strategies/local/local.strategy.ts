@@ -3,8 +3,8 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
 
 import { AuthService } from '../../service/auth.service';
-import { UserLoginDto } from '../../dto/user-login.dto';
-import { AccessTokenDto } from '../../dto/access-token.dto';
+import { UserLoginDto } from '../../dtos/user-login.dto';
+import { AccessTokenDto } from '../../dtos/access-token.dto';
 
 /**
  * Local Strategy for Passport Authentication

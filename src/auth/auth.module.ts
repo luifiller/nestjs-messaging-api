@@ -9,7 +9,7 @@ import { UserService } from '../user/user.service';
 import { LocalStrategy } from './strategies/local/local.strategy';
 import { JwtStrategy } from './strategies/jwt/jwt.strategy';
 import { JwtKeyProvider } from './utils/jwt-key-provider';
-import { AuthConfig } from './constant/auth.const';
+import { AuthConfig } from './constants/auth.const';
 
 /**
  * Authentication Module

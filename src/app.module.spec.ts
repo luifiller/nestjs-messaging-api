@@ -9,10 +9,10 @@ import { HealthModule } from './health/health.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthService } from './auth/service/auth.service';
 import { HealthController } from './health/controller/health.controller';
-import { AuthConfig } from './auth/constant/auth.const';
-import { DynamoDBModule } from './database/dynamodb.module';
+import { AuthConfig } from './auth/constants/auth.const';
+import { DynamoDBModule } from './infrastructure/database/dynamodb.module';
 import { MessageModule } from './message/message.module';
-import { ThrottlerConfig } from './common/config/throttler.config';
+import { ThrottlerConfig } from './infrastructure/config/throttler/throttler.config';
 
 jest.mock('fs');
 const mockedFs = fs as jest.Mocked<typeof fs>;

@@ -19,15 +19,15 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 
-import { CurrentUser } from '../../auth/decorators/current-user.decorator';
 import { JwtAuthGuard } from '../../auth/guards/jwt/jwt.guard';
 import { MessageService } from '../service/message.service';
-import { CreateMessageReqDto } from '../dto/create-message-request.dto';
-import { MessageResponseDto } from '../dto/message-response.dto';
-import { UpdateMessageStatusReqDto } from '../dto/update-message-status-request.dto';
-import { QueryMessagesRequestDto } from '../dto/query-messages.dto';
+import { CreateMessageReqDto } from '../dtos/create-message-request.dto';
+import { MessageResponseDto } from '../dtos/message-response.dto';
+import { UpdateMessageStatusReqDto } from '../dtos/update-message-status-request.dto';
+import { QueryMessagesRequestDto } from '../dtos/query-messages.dto';
 import { Message } from '../interface/message.interface';
-import { MessageConst } from '../constant/message.const';
+import { MessageConst } from '../constants/message.const';
+import { CurrentUser } from '../../presentation/http/decorators/current-user.decorator';
 
 @ApiTags('Messages')
 @UseGuards(JwtAuthGuard)

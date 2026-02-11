@@ -1,5 +1,5 @@
 import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
-import { MessageStatus } from '../enum/message-status.enum';
+import { MessageStatus } from '../enums/message-status.enum';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateMessageStatusReqDto {

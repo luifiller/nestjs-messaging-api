@@ -6,11 +6,11 @@ import {
 } from '@nestjs/common';
 
 import { MessageRepository } from '../repository/message.repository';
-import { CreateMessageReqDto } from '../dto/create-message-request.dto';
-import { QueryMessagesRequestDto } from '../dto/query-messages.dto';
-import { UpdateMessageStatusReqDto } from '../dto/update-message-status-request.dto';
+import { CreateMessageReqDto } from '../dtos/create-message-request.dto';
+import { QueryMessagesRequestDto } from '../dtos/query-messages.dto';
+import { UpdateMessageStatusReqDto } from '../dtos/update-message-status-request.dto';
 import { Message } from '../interface/message.interface';
-import { MessageConst } from '../constant/message.const';
+import { MessageConst } from '../constants/message.const';
 
 /**
  * Message Service
