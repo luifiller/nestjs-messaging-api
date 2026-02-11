@@ -1,11 +1,15 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { UserLoginDto } from '../dto/user-login.dto';
-import { AccessTokenDto } from '../dto/access-token.dto';
+import { UserLoginDto } from '../dtos/user-login.dto';
+import { AccessTokenDto } from '../dtos/access-token.dto';
 import { UserService } from '../../user/user.service';
 import { UserDto } from '../../user/dto/user.dto';
-import { AuthConfig } from '../constant/auth.const';
+import { AuthConfig } from '../constants/auth.const';
 
 /**
  * Authentication Service
@@ -62,7 +66,7 @@ export class AuthService {
 
     const token = await this.jwtService.signAsync(payload);
     if (!token) {
-      throw new Error(
+      throw new InternalServerErrorException(
         AuthConfig.API_DOC.LOGIN_TOKEN_GENERATION_FAILURE_RESPONSE,
       );
     }

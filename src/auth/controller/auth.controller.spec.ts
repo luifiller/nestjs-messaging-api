@@ -3,10 +3,10 @@ import { HttpStatus, UnauthorizedException } from '@nestjs/common';
 
 import { AuthController } from './auth.controller';
 import { AuthService } from '../service/auth.service';
-import { UserLoginDto } from '../dto/user-login.dto';
-import { AccessTokenDto } from '../dto/access-token.dto';
+import { UserLoginDto } from '../dtos/user-login.dto';
+import { AccessTokenDto } from '../dtos/access-token.dto';
 import { LocalGuard } from '../guards/local/local.guard';
-import { AuthConfig } from '../constant/auth.const';
+import { AuthConfig } from '../constants/auth.const';
 
 describe('AuthController', () => {
   let controller: AuthController;

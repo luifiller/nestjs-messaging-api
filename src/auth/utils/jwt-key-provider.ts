@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
 
-import { AuthConfig } from '../constant/auth.const';
+import { AuthConfig } from '../constants/auth.const';
 
 /**
  * JWT Key Provider
@@ -111,13 +111,15 @@ export class JwtKeyProvider {
     const keyFullPath = join(process.cwd(), keyPath);
 
     if (!existsSync(keyFullPath)) {
-      throw new Error(`${notFoundMessage} ${keyFullPath}`);
+      throw new InternalServerErrorException(
+        `${notFoundMessage} ${keyFullPath}`,
+      );
     }
 
     try {
       return readFileSync(keyFullPath, AuthConfig.ENV.UTF8_ENCODING);
     } catch (error) {
-      throw new Error(
+      throw new InternalServerErrorException(
         `${AuthConfig.EXCEPTION_MESSAGES.JWT_KEY_READ_FILE_ERROR} ${error.message}`,
       );
     }

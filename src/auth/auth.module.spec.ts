@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import { InternalServerErrorException } from '@nestjs/common';
 import * as fs from 'fs';
 
 import { AuthModule } from './auth.module';
@@ -8,7 +9,7 @@ import { AuthService } from './service/auth.service';
 import { UserService } from '../user/user.service';
 import { AuthController } from './controller/auth.controller';
 import { JwtKeyProvider } from './utils/jwt-key-provider';
-import { AuthConfig } from './constant/auth.const';
+import { AuthConfig } from './constants/auth.const';
 import { LocalStrategy } from './strategies/local/local.strategy';
 import { JwtStrategy } from './strategies/jwt/jwt.strategy';
 
@@ -46,8 +47,8 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PRIVATE_KEY_PATH: 'private.pem',
-                JWT_PUBLIC_KEY_PATH: 'public.pem',
+                JWT_PRIVATE_KEY_PATH: './certs/private.pem',
+                JWT_PUBLIC_KEY_PATH: './certs/public.pem',
                 JWT_EXPIRES_IN: AuthConfig.JWT.EXPIRE_TIME,
               }),
             ],
@@ -83,8 +84,8 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PRIVATE_KEY_PATH: 'private.pem',
-                JWT_PUBLIC_KEY_PATH: 'public.pem',
+                JWT_PRIVATE_KEY_PATH: './certs/private.pem',
+                JWT_PUBLIC_KEY_PATH: './certs/public.pem',
                 JWT_EXPIRES_IN: AuthConfig.JWT.EXPIRE_TIME,
               }),
             ],
@@ -114,7 +115,7 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PUBLIC_KEY_PATH: 'public.pem',
+                JWT_PUBLIC_KEY_PATH: './certs/public.pem',
                 JWT_EXPIRES_IN: AuthConfig.JWT.EXPIRE_TIME,
               }),
             ],
@@ -139,7 +140,7 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PRIVATE_KEY_PATH: 'private.pem',
+                JWT_PRIVATE_KEY_PATH: './certs/private.pem',
                 JWT_EXPIRES_IN: AuthConfig.JWT.EXPIRE_TIME,
               }),
             ],
@@ -165,8 +166,8 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PRIVATE_KEY_PATH: 'private.pem',
-                JWT_PUBLIC_KEY_PATH: 'public.pem',
+                JWT_PRIVATE_KEY_PATH: './certs/private.pem',
+                JWT_PUBLIC_KEY_PATH: './certs/public.pem',
                 JWT_EXPIRES_IN: AuthConfig.JWT.EXPIRE_TIME,
               }),
             ],
@@ -192,8 +193,8 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PRIVATE_KEY_PATH: 'private.pem',
-                JWT_PUBLIC_KEY_PATH: 'public.pem',
+                JWT_PRIVATE_KEY_PATH: './certs/private.pem',
+                JWT_PUBLIC_KEY_PATH: './certs/public.pem',
                 JWT_EXPIRES_IN: AuthConfig.JWT.EXPIRE_TIME,
               }),
             ],
@@ -212,7 +213,7 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
       // Arrange
       mockedFs.existsSync.mockReturnValue(true);
       mockedFs.readFileSync.mockImplementation(() => {
-        throw new Error('Permission denied');
+        throw new InternalServerErrorException('Permission denied');
       });
 
       const moduleFactory = Test.createTestingModule({
@@ -222,8 +223,8 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PRIVATE_KEY_PATH: 'private.pem',
-                JWT_PUBLIC_KEY_PATH: 'public.pem',
+                JWT_PRIVATE_KEY_PATH: './certs/private.pem',
+                JWT_PUBLIC_KEY_PATH: './certs/public.pem',
                 JWT_EXPIRES_IN: AuthConfig.JWT.EXPIRE_TIME,
               }),
             ],
@@ -248,8 +249,8 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PRIVATE_KEY_PATH: 'private.pem',
-                JWT_PUBLIC_KEY_PATH: 'public.pem',
+                JWT_PRIVATE_KEY_PATH: './certs/private.pem',
+                JWT_PUBLIC_KEY_PATH: './certs/public.pem',
                 JWT_EXPIRES_IN: AuthConfig.JWT.EXPIRE_TIME,
               }),
             ],
@@ -283,8 +284,8 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PRIVATE_KEY_PATH: 'private.pem',
-                JWT_PUBLIC_KEY_PATH: 'public.pem',
+                JWT_PRIVATE_KEY_PATH: './certs/private.pem',
+                JWT_PUBLIC_KEY_PATH: './certs/public.pem',
                 JWT_EXPIRES_IN: '3600',
               }),
             ],
@@ -317,8 +318,8 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PRIVATE_KEY_PATH: 'private.pem',
-                JWT_PUBLIC_KEY_PATH: 'public.pem',
+                JWT_PRIVATE_KEY_PATH: './certs/private.pem',
+                JWT_PUBLIC_KEY_PATH: './certs/public.pem',
                 // JWT_EXPIRES_IN not provided
               }),
             ],
@@ -348,8 +349,8 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PRIVATE_KEY_PATH: 'private.pem',
-                JWT_PUBLIC_KEY_PATH: 'public.pem',
+                JWT_PRIVATE_KEY_PATH: './certs/private.pem',
+                JWT_PUBLIC_KEY_PATH: './certs/public.pem',
                 JWT_EXPIRES_IN: '7200',
               }),
             ],
@@ -381,8 +382,8 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn/v...
             ignoreEnvFile: true,
             load: [
               () => ({
-                JWT_PRIVATE_KEY_PATH: 'private.pem',
-                JWT_PUBLIC_KEY_PATH: 'public.pem',
+                JWT_PRIVATE_KEY_PATH: './certs/private.pem',
+                JWT_PUBLIC_KEY_PATH: './certs/public.pem',
                 JWT_EXPIRES_IN: AuthConfig.JWT.EXPIRE_TIME,
               }),
             ],

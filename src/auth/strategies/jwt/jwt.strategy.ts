@@ -4,8 +4,8 @@ import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 
 import { JwtKeyProvider } from '../../utils/jwt-key-provider';
-import { AuthConfig } from '../../constant/auth.const';
-import { JwtPayloadDto } from 'src/auth/dto/jwt-payload.dto';
+import { AuthConfig } from '../../constants/auth.const';
+import { JwtPayloadDto } from '../../dtos/jwt-payload.dto';
 
 /**
  * JWT authentication strategy

@@ -9,10 +9,10 @@ import {
 import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 import { AuthService } from '../service/auth.service';
-import { UserLoginDto } from '../dto/user-login.dto';
-import { AccessTokenDto } from '../dto/access-token.dto';
+import { UserLoginDto } from '../dtos/user-login.dto';
+import { AccessTokenDto } from '../dtos/access-token.dto';
 import { LocalGuard } from '../guards/local/local.guard';
-import { AuthConfig } from '../constant/auth.const';
+import { AuthConfig } from '../constants/auth.const';
 
 @Controller('auth')
 export class AuthController {

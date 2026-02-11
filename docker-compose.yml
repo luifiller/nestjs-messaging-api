@@ -1,4 +1,17 @@
 services:
+  # DynamoDB Local para desenvolvimento
+  dynamodb-local:
+    profiles: [ "development" ]
+    image: amazon/dynamodb-local:latest
+    container_name: dynamodb-local
+    ports:
+      - "8000:8000"
+    command: [ "-jar", "DynamoDBLocal.jar", "-sharedDb" ]
+    volumes:
+      - dynamodb-data:/home/dynamodblocal/data
+    networks:
+      - messaging-network
+
   dev:
     profiles: [ "development" ]
     build:
@@ -13,10 +26,20 @@ services:
       DD_ENV: development
       DD_SERVICE: nestjs-messaging-api
       DD_AGENT_HOST: host.docker.internal
-      JWT_SECRET: e8TBM4N%hZiW|6sho5=K/J-_*EH038@i
+
       JWT_EXPIRES_IN: 3600s
-      JWT_PRIVATE_KEY_PATH: ./private.pem
-      JWT_PUBLIC_KEY_PATH: ./public.pem
+      JWT_PRIVATE_KEY_PATH: ./certs/private.pem
+      JWT_PUBLIC_KEY_PATH: ./certs/public.pem
+
+      AWS_REGION: us-east-1
+      AWS_DYNAMODB_ENDPOINT: http://dynamodb-local:8000
+      AWS_ACCESS_KEY_ID: local
+      AWS_SECRET_ACCESS_KEY: local
+      DYNAMODB_TABLE_MESSAGES: messages
+    depends_on:
+      - dynamodb-local
+    networks:
+      - messaging-network
 
   staging:
     profiles: [ "staging" ]
@@ -32,10 +55,15 @@ services:
       DD_ENV: staging
       DD_SERVICE: nestjs-messaging-api
       DD_AGENT_HOST: host.docker.internal
-      JWT_SECRET: e8TBM4N%hZiW|6sho5=K/J-_*EH038@i
+
       JWT_EXPIRES_IN: 3600s
-      JWT_PRIVATE_KEY_PATH: ./private.pem
-      JWT_PUBLIC_KEY_PATH: ./public.pem
+      JWT_PRIVATE_KEY_PATH: ./certs/private.pem
+      JWT_PUBLIC_KEY_PATH: ./certs/public.pem
+
+      AWS_REGION: us-east-1
+      DYNAMODB_TABLE_MESSAGES: messages-staging
+    networks:
+      - messaging-network
 
   prod:
     profiles: [ "production" ]
@@ -51,7 +79,15 @@ services:
       DD_ENV: production
       DD_SERVICE: nestjs-messaging-api
       DD_AGENT_HOST: host.docker.internal
-      JWT_SECRET: e8TBM4N%hZiW|6sho5=K/J-_*EH038@i
-      JWT_EXPIRES_IN: 3600s
-      JWT_PRIVATE_KEY_PATH: ./private.pem
-      JWT_PUBLIC_KEY_PATH: ./public.pem
+
+      AWS_REGION: us-east-1
+      DYNAMODB_TABLE_MESSAGES: messages-production
+    networks:
+      - messaging-network
+
+networks:
+  messaging-network:
+    driver: bridge
+
+volumes:
+  dynamodb-data:

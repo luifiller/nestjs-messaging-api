@@ -1,9 +1,5 @@
 # 📩 Message Service API
 
-> API RESTful de mensagens construída com foco em arquitetura, observabilidade e evolução contínua.
-
----
-
 ## Objetivo
 
 Este projeto tem como objetivo desenvolver uma API RESTful de mensagens, utilizando Node.js com NestJS, simulando um cenário real de um ambiente bancário.
@@ -22,16 +18,10 @@ O projeto foi confeccionado como um sistema orgânico, preparado para crescer, s
   - por ID
   - por remetente
   - por período (intervalo de datas)
-- Atualização de status da mensagem (`enviado`, `recebido`, `lido`)
+- Atualiza`ção `e status da mensam (`enviado`, `recebido`, `lido`)
 - Validações de entrada via DTOs
-- Autenticação usando JWT
-- Persistência **in-memory** na V1
-- Observabilidade desde o início:
-  - logs estruturados
-  - métricas básicas
-  - tracing distribuído (Datadog)
-- Documentação técnica e diagramas de arquitetura
-- Testes unitários
+- Documentação técnica
+- Testes unitários com Jest
 - Arquitetura modular e organizada, preparada para evolução futura
 - Organização do código seguindo boas práticas do NestJS
 
@@ -48,7 +38,16 @@ O projeto foi confeccionado como um sistema orgânico, preparado para crescer, s
 - Buscar mensagens por período
 - Atualizar status de uma mensagem
   - Permitir apenas a transição sequencial de status de uma mensagem (`enviado` → `recebido` → `lido`)
-- Garantir estados válidos para o status da mensagem, bloqueando transições inválidas ou regressões de status
+
+---
+
+### Requisitos diferenciais (não obrigatórios, mas desejáveis)
+
+- [x] Autenticação usando JWT
+- [x] Persistência de dados com DynamoDB
+- [x] Observabilidade com Datadog ou Winston (logs, métricas e tracing)
+  - Parcialmente atendido, pois a estratégia de logs com Winston não foi implementada devido ao tempo limitado (configurações específicas do Datadog no host pessoal), mas foi utilizado o `Logger` do `@nestjs/common` para mapeamento de casos de exceção.
+- [x] Diagramas de arquitetura
 
 ---
 
@@ -62,6 +61,7 @@ O projeto foi confeccionado como um sistema orgânico, preparado para crescer, s
 - Código testável e de fácil manutenção
 - Documentação clara, objetiva e acessível
 - API preparada para consumo por um front-end futuro
+- Garantir estados válidos para o status da mensagem, bloqueando transições inválidas
 
 ---
 
@@ -69,24 +69,14 @@ O projeto foi confeccionado como um sistema orgânico, preparado para crescer, s
 
 - Não haverá desenvolvimento de interface gráfica
 - A comunicação será exclusivamente via API REST
-- A persistência inicial será in-memory
-- O projeto não depende de infraestrutura real da AWS para rodar localmente
-- O uso de Datadog será preparado no código, mesmo que não esteja ativo no ambiente local
+- O projeto não depende de infraestrutura real da AWS (DynamoDB será simulado localmente)
+- O uso de Datadog também é simulado localmente via Datadog Agent na minha máquina
 
 ---
 
-## Tecnologias Utilizadas
+## Requisitos de entrega de projeto
 
-- Node.js
-- NestJS
-- TypeScript
-- JWT para autenticação
-- Datadog para observabilidade
-- Jest para testes unitários
-- Swagger para documentação da API
-- Docker para containerização
-- Docker Compose para orquestração de containers
-- Git para controle de versão
-- ESLint e Prettier para linting e formatação de código
-- Insomnia para testes de API
-- In-memory database (ex: Map ou Array) para persistência inicial
+- [x] Repositório público no GitHub
+- [x] README com instruções de execução e explicações sobre decisões técnicas
+- [x] Criar um fluxograma da API no draw.io
+- [x] Collection do Insomnia para teste da API

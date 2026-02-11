@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { LocalStrategy } from './local.strategy';
 import { AuthService } from '../../service/auth.service';
-import { AccessTokenDto } from '../../dto/access-token.dto';
+import { AccessTokenDto } from '../../dtos/access-token.dto';
 
 describe('LocalStrategy', () => {
   let strategy: LocalStrategy;

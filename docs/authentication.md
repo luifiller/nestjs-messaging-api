@@ -121,7 +121,7 @@ sequenceDiagram
 
 ---
 
-### TBD - Acesso a Rota Protegida
+### Acesso a Rota Protegida
 
 ```mermaid
 sequenceDiagram
@@ -154,6 +154,10 @@ sequenceDiagram
 6. Token é verificado e decodificado
 7. Payload do token é anexado a `req.user`
 8. Controlador tem acesso aos dados do usuário autenticado
+9. Caso ele estiver autenticado, a requisição prossegue normalmente, caso contrário, retorna 401 Unauthorized.
+10. Próximo passo é ir até a camada de serviço para realizar a lógica de negócio, como buscar mensagens do usuário autenticado.
+11. Depois ir até a camada de repositório para buscar os dados no banco de dados e retornar a resposta para o cliente.
+12. Por fim, o cliente recebe a resposta com os dados protegidos.
 
 ---
 

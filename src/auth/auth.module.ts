@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { InternalServerErrorException, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
@@ -9,7 +9,7 @@ import { UserService } from '../user/user.service';
 import { LocalStrategy } from './strategies/local/local.strategy';
 import { JwtStrategy } from './strategies/jwt/jwt.strategy';
 import { JwtKeyProvider } from './utils/jwt-key-provider';
-import { AuthConfig } from './constant/auth.const';
+import { AuthConfig } from './constants/auth.const';
 
 /**
  * Authentication Module
@@ -50,7 +50,9 @@ import { AuthConfig } from './constant/auth.const';
         const privateKey = jwtKeyProvider.getPrivateKey();
 
         if (!privateKey || !publicKey) {
-          throw new Error(AuthConfig.EXCEPTION_MESSAGES.JWT_KEYS_NOT_DEFINED);
+          throw new InternalServerErrorException(
+            AuthConfig.EXCEPTION_MESSAGES.JWT_KEYS_NOT_DEFINED,
+          );
         }
 
         const expiresInConfig = configService.get<string>(
