@@ -11,7 +11,7 @@ import {
 
 import { AppModule } from './app.module';
 import { DatadogUserInterceptor } from './infrastructure/observability/datadog/interceptor/datadog-user.interceptor';
-import { HttpExceptionFilter } from './presentation/http/filter/http-exception.filter/http-exception.filter';
+import { HttpExceptionFilter } from './presentation/http/filters/http-exception.filter/http-exception.filter';
 
 declare const module: any;
 

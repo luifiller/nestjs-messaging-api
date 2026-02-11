@@ -5,12 +5,12 @@ import { DatadogTraceModule } from 'nestjs-ddtrace';
 import * as fs from 'fs';
 
 import { AppModule } from './app.module';
-import { HealthModule } from './health/health.module';
-import { AuthModule } from './auth/auth.module';
-import { AuthService } from './auth/service/auth.service';
-import { HealthController } from './health/controller/health.controller';
-import { AuthConfig } from './auth/constant/auth.const';
-import { MessageModule } from './message/message.module';
+import { HealthModule } from './modules/health/health.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { AuthService } from './application/auth/services/auth.service';
+import { HealthController } from './presentation/health/controllers/health.controller';
+import { AuthConfig } from './infrastructure/config/auth/auth.const';
+import { MessageModule } from './modules/message/message.module';
 import { ThrottlerConfig } from './infrastructure/config/throttler.config';
 import { DynamoDBModule } from './infrastructure/database/dynamodb/dynamodb.module';
 

@@ -4,10 +4,10 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { DatadogTraceModule } from 'nestjs-ddtrace';
 
-import { HealthModule } from './health/health.module';
-import { AuthModule } from './auth/auth.module';
-import { AuthConfig } from './auth/constant/auth.const';
-import { MessageModule } from './message/message.module';
+import { HealthModule } from './modules/health/health.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { AuthConfig } from './infrastructure/config/auth/auth.const';
+import { MessageModule } from './modules/message/message.module';
 import { ThrottlerConfig } from './infrastructure/config/throttler.config';
 import { DynamoDBModule } from './infrastructure/database/dynamodb/dynamodb.module';
 
