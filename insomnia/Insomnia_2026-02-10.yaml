@@ -1,0 +1,348 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: nestjs-messaging-api
+meta:
+  id: wrk_a800537977f043ea91ebbfcbd6b87d4d
+  created: 1770343863508
+  modified: 1770343863508
+  description: ""
+collection:
+  - name: Messages
+    meta:
+      id: fld_dab6871faf764ca2a720f51bd15d12ba
+      created: 1770343883881
+      modified: 1770343883881
+      sortKey: -1770343883881
+      description: ""
+    children:
+      - url: "{{ _.baseUrl }}{{ _.messageEndpoint
+          }}/a3929b06-88d3-44ed-b173-d8b394882b7a"
+        name: Find By ID
+        meta:
+          id: req_9fed5a36c25744f7a21d9eb337311374
+          created: 1770358351239
+          modified: 1770690116454
+          isPrivate: false
+          description: ""
+          sortKey: -1770343893753
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.3.1
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ _.jwtToken }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseUrl }}{{ _.messageEndpoint }}"
+        name: Create
+        meta:
+          id: req_3bc29a7f86744f7390dea52e4cb36df2
+          created: 1770597882310
+          modified: 1770769514405
+          isPrivate: false
+          description: ""
+          sortKey: -1770343809522
+        method: POST
+        body:
+          mimeType: application/x-www-form-urlencoded
+          params:
+            - name: content
+              value: gaman
+              description: ""
+              disabled: true
+        headers:
+          - name: Content-Type
+            value: application/x-www-form-urlencoded
+          - name: User-Agent
+            value: insomnia/12.3.1
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ _.jwtToken }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseUrl }}{{ _.messageEndpoint
+          }}/a3929b06-88d3-44ed-b173-d8b394882b7a/status"
+        name: Update Status
+        meta:
+          id: req_d5951811af5a4354be61273d7a56f0c6
+          created: 1770615322980
+          modified: 1770770728810
+          isPrivate: false
+          description: ""
+          sortKey: -1770343767406.5
+        method: PATCH
+        body:
+          mimeType: application/x-www-form-urlencoded
+          params:
+            - name: status
+              value: SENT
+              description: ""
+              disabled: false
+        headers:
+          - name: Content-Type
+            value: application/x-www-form-urlencoded
+          - name: User-Agent
+            value: insomnia/12.3.1
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ _.jwtToken }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseUrl }}{{ _.messageEndpoint }}"
+        name: Find By Sender
+        meta:
+          id: req_653ce8c3a5864d6a98f2c517f21d3f55
+          created: 1770618442002
+          modified: 1770774336670
+          isPrivate: false
+          description: ""
+          sortKey: -1770343851637.5
+        method: GET
+        parameters:
+          - name: sender
+            value: luifiller
+            description: ""
+            disabled: false
+          - name: limit
+            value: "2"
+            description: ""
+            disabled: true
+          - name: cursor
+            value: "{{ _.nextCursorSender }}"
+            description: ""
+            disabled: true
+          - name: startDate
+            value: "1770690758432"
+            description: ""
+            disabled: true
+          - name: endDate
+            value: "1770690758432"
+            description: ""
+            disabled: true
+        headers:
+          - name: User-Agent
+            value: insomnia/12.3.1
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ _.jwtToken }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseUrl }}{{ _.messageEndpoint }}"
+        name: Find By Date Range
+        meta:
+          id: req_c859f1f240d94a0d9df37753e7842086
+          created: 1770622858650
+          modified: 1770769543149
+          isPrivate: false
+          description: ""
+          sortKey: -1770343830579.75
+        method: GET
+        parameters:
+          - name: startDate
+            value: "1770680031459"
+            description: ""
+            disabled: false
+          - name: endDate
+            value: "1770680196191"
+            description: ""
+            disabled: false
+          - name: limit
+            value: "3"
+            description: ""
+            disabled: true
+          - name: cursor
+            value: "{{ _.nextCursordDateRange }}"
+            description: ""
+            disabled: true
+        headers:
+          - name: User-Agent
+            value: insomnia/12.3.1
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ _.jwtToken }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Health Check
+    meta:
+      id: fld_44e678a66dca43968dbabce5d6515a3f
+      created: 1770423873394
+      modified: 1770423873394
+      sortKey: -1770423873394
+      description: ""
+    children:
+      - url: "{{ _.baseUrl }}{{ _.healthEndpoint }}"
+        name: Check
+        meta:
+          id: req_d944c0dc84654d9e90ba84a8a81b22dd
+          created: 1770343915280
+          modified: 1770598005244
+          isPrivate: false
+          description: ""
+          sortKey: -1770423876657
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.3.1
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Auth
+    meta:
+      id: fld_0eba8b024d5e420eb59b7b17a4247c6d
+      created: 1770431507493
+      modified: 1770690139316
+      sortKey: -1770431507493
+      description: ""
+    children:
+      - url: "{{ _.baseUrl }}{{ _.authEndpoint }}/login"
+        name: Login
+        meta:
+          id: req_f34db0c6d827428e80f72595bd143cd2
+          created: 1770431510800
+          modified: 1770774488191
+          isPrivate: false
+          description: ""
+          sortKey: -1770431510800
+        method: POST
+        body:
+          mimeType: application/x-www-form-urlencoded
+          params:
+            - name: username
+              value: luifiller
+              description: ""
+              disabled: true
+            - name: email
+              value: lui@g.com
+              description: ""
+              disabled: false
+            - name: password
+              value: "@Abc123"
+              description: ""
+              disabled: false
+            - name: roles
+              value: USER
+              description: ""
+              disabled: false
+              multiline: false
+              type: text
+        headers:
+          - name: Content-Type
+            value: application/x-www-form-urlencoded
+          - name: User-Agent
+            value: insomnia/12.3.1
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_868cf90a9d439a5a267e7f2a46ae1a291b342297
+    created: 1770343863510
+    modified: 1770343863510
+environments:
+  name: Environments
+  meta:
+    id: env_868cf90a9d439a5a267e7f2a46ae1a291b342297
+    created: 1770343863509
+    modified: 1770424911986
+    isPrivate: false
+  data:
+    baseUrl: http://localhost:3000
+  subEnvironments:
+    - name: Staging
+      meta:
+        id: env_607270a2de33418e9279710522fd0730
+        created: 1770424921275
+        modified: 1770424974485
+        isPrivate: false
+        sortKey: 1770424921277
+      data:
+        baseUrl: http://localhost:3001
+    - name: Development
+      meta:
+        id: env_336c77de1e9b4b358c0f3b37b8a899f1
+        created: 1770424930991
+        modified: 1770690798599
+        isPrivate: false
+        sortKey: 1770424921276
+      data:
+        baseUrl: http://localhost:3000/api/v1
+        messageEndpoint: /messages
+        authEndpoint: /auth
+        healthEndpoint: /health
+        jwtToken: "{% response 'body', 'req_f34db0c6d827428e80f72595bd143cd2',
+          'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'when-expired', 3600 %}"
+        nextCursorSender: "{% response 'body', 'req_653ce8c3a5864d6a98f2c517f21d3f55',
+          'b64::JC5uZXh0Q3Vyc29y::46b', 'no-history', 60 %}"
+        nextCursordDateRange: "{% response 'body',
+          'req_c859f1f240d94a0d9df37753e7842086', 'b64::JC5uZXh0Q3Vyc29y::46b',
+          'no-history', 60 %}"
+    - name: Production
+      meta:
+        id: env_8b33ff0c0b684e1998dc0a74ef0dae3a
+        created: 1770424943664
+        modified: 1770425034002
+        isPrivate: false
+        sortKey: 1770424921278
+      data:
+        baseUrl: http://localhost:3002

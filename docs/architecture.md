@@ -2,9 +2,9 @@
 
 ## Visão Geral
 
-A arquitetura da aplicação foi desenhada com foco em clareza, separação de responsabilidades e facilidade de evolução.
+Pensando que é um projeto de pequeno porte, com resquisitos "simples" e com uma constraint de tempo para seu devido desenvolvimento, escolhi construir esse sistema com foco em clareza, separação de responsabilidades e facilidade de evolução.
 
-O sistema segue uma abordagem modular e orientada a domínio, onde:
+Desta forma, decidi seguir pela abordagem modular em camadas e orientada a domínio (Padrão do NestJS e semelhante ao Angular), onde:
 
 - regras de negócio são protegidas de detalhes de infraestrutura;
 - preocupações transversais (observabilidade, autenticação) não poluem o domínio;
@@ -13,11 +13,15 @@ O sistema segue uma abordagem modular e orientada a domínio, onde:
 
 A aplicação foi pensada como uma API-first, preparada para ser consumida por um front-end futuro.
 
+> ⚠️ Nota
+> No momento de pensar e refinar o domínio do sistema e no design/arquitetura dele, foi pensado em utilizar Clean Architecture para se beneficiar da flexibilidade, desacoplamento e manutenibilidade, bem como do menor esforço e atritos frente a oportunidades/necessidades de escalar ou de estar em um contexto de grandes ou recorrentes mudanças (de framework, de banco de dados, de provedor de cloud).
+> No entanto, dada a simplicidade do domínio e a natureza de um projeto de pequeno porte, optei por uma arquitetura que pudesse favorecer uma entrega de valor rápida, consistente, de qualidade e organizada, tendo a possibilidade de lidar com evoluções e melhoria contínua a depender de futuras mudanças do contexto na qual ela se encontraria.
+
 ---
 
 ## Camadas da Aplicação
 
-A aplicação é dividida nas seguintes camadas:
+A aplicação foi, então, dividida da seguinte forma, para cada domínio e contexto (autenticação [`auth`], mensagens [`messages`], saúde da aplicação [`health`]) foi criado um módulo próprio e em sua estrutura interna, cada módulo é organizado nas seguintes camadas:
 
 ### Controller
 
@@ -25,10 +29,9 @@ Tendo as seguintes responsabilidades:
 
 - Expor endpoints REST
 - Receber requisições HTTP
-- Validar dados de entrada via DTOs
-- Orquestrar autenticação (JWT Guards)
+- Validar dados de entrada via DTOs usando `class-transformer` e `class-validator`
+- Orquestrar autenticação (Local Guards ou JWT Guards)
 - Delegar a execução para a camada de serviço
-- Traduzir exceções de domínio em respostas HTTP
 
 ### Service
 
@@ -37,6 +40,7 @@ Tendo as seguintes responsabilidades:
 - Implementar os casos de uso do sistema
 - Orquestrar regras de negócio
 - Coordenar chamadas para a camada de persistência
+- Lançar exceções a partir de regras de negócio
 - Emitir logs, métricas e traces de negócio
 
 ### Domain
@@ -56,30 +60,27 @@ Tendo as seguintes responsabilidades:
 - Implementar estratégias de armazenamento
 - Traduzir dados entre domínio e infraestrutura
 
-A persistência é acessada por meio de interfaces, permitindo múltiplas implementações:
-
-- In-memory (V1)
-- DynamoDB (evolução)
-
-A camada de serviço depende apenas da abstração, nunca da implementação concreta.
-
 ### Camadas Transversais
 
 Algumas funcionalidades são implementadas de forma transversal, sem poluir as camadas de domínio:
 
 #### Autenticação
 
+`AuthModule` foi tratado como módulo vertical da aplicação, encapsulando controller, estratégias, guards e providers relacionados à autenticação.
+
+Isso mantém alta coesão e facilita futura extração para microserviço independente, se necessário.
+
 - Implementada via Guards
 - Atua antes da entrada nos controllers
 - Não interfere nas regras de negócio
 - Protege os endpoints da API
 
+O guard e o strategy local são específicos para o endpoint de login, enquanto o guard JWT é utilizado para proteger os endpoints que exigem autenticação.
+
 #### Observabilidade
 
-- Logs estruturados
-- Métricas de negócio
 - Tracing distribuído
-- Atua de forma transversal em controllers, services e ExceptionFilters
+- Atua de forma transversal em controllers, services e ExceptionFilter
 
 ---
 
@@ -103,7 +104,12 @@ Algumas funcionalidades são implementadas de forma transversal, sem poluir as c
 |---------------------------|
 |                           |
 |  +---------------------+  |
-|  |    Auth Guard (JWT) |  |
+|  |  Auth Guard (Local) |  |
+|  +---------------------+  |
+|             |             |
+|             v             |
+|  +---------------------+  |
+|  |   Auth Guard (JWT)  |  |
 |  +---------------------+  |
 |             |             |
 |             v             |
@@ -136,33 +142,3 @@ Algumas funcionalidades são implementadas de forma transversal, sem poluir as c
 ```
 
 ---
-
-## Decisões Técnicas
-
-**Separação clara de camadas**
-
-- Facilita manutenção
-- Facilita testes
-- Reduz acoplamento
-
-**Domínio isolado**
-
-- Protege regras de negócio
-- Permite evoluções sem grandes impactos estruturais
-
-**Repository pattern**
-
-- Permite múltiplas persistências
-- Facilita migração para DynamoDB
-
-**Observabilidade desde o início**
-
-- Facilita debugging
-- Simula ambiente real de produção
-- Evita retrabalho futuro
-
-**JWT**
-
-- Garante segurança na autenticação
-- Facilita integração com front-end
-- Suporta escalabilidade
