@@ -37,6 +37,10 @@ A documentação do projeto está organizada no diretório [`/docs`](./docs) e d
   - [`dynamodb.md`](./docs/dynamodb.md)
     Detalha a estrutura de dados no DynamoDB, incluindo tabelas, índices e atributos.
 
+- **Observabilidade - Datadog**
+  - [`datadog.md`](./docs/datadog.md)
+    Documentação completa da integração com Datadog APM, incluindo configuração, rastreamento de usuários e visualização de traces.
+
 ## Decisões Técnicas
 
 **Separação clara de camadas dos modules**

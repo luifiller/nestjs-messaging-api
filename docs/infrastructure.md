@@ -9,17 +9,12 @@
 - [Pré-requisitos](#pré-requisitos)
 - [Arquitetura Docker](#arquitetura-docker)
   - [Multi-Stage Build](#multi-stage-build)
-  - [Segurança](#segurança)
   - [Processo de Inicialização](#processo-de-inicialização)
-- [Serviços e Dependências](#serviços-e-dependências)
-  - [DynamoDB Local](#dynamodb-local)
   - [Networks](#networks)
   - [Volumes](#volumes)
 - [Ambientes Disponíveis](#ambientes-disponíveis)
 - [Variáveis de Ambiente](#variáveis-de-ambiente)
 - [Principais Comandos](#principais-comandos)
-- [Comandos Úteis](#comandos-úteis)
-- [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -32,6 +27,8 @@ A decisão foi tomada para facilitar a minha vida na hora de subir a aplicação
 Além disso, a abordagem prepara o terreno para uma futura orquestração em ambientes como ECS ou Kubernetes (EKS).
 
 Como eu instalei o Datadog Agent na minha máquina host local Windows, então a execução dele acontece fora do container, sendo acessado via `host.docker.internal`. Assim, a observabilidade permanece ativa em todos ambientes.
+
+> 📖 **Documentação completa da integração com Datadog**: [`datadog.md`](./datadog.md)
 
 ### Por que Docker?
 
