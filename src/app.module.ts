@@ -7,9 +7,9 @@ import { DatadogTraceModule } from 'nestjs-ddtrace';
 import { HealthModule } from './health/health.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthConfig } from './auth/constant/auth.const';
-import { DynamoDBModule } from './database/dynamodb.module';
 import { MessageModule } from './message/message.module';
-import { ThrottlerConfig } from './common/config/throttler.config';
+import { ThrottlerConfig } from './infrastructure/config/throttler.config';
+import { DynamoDBModule } from './infrastructure/database/dynamodb/dynamodb.module';
 
 @Module({
   imports: [

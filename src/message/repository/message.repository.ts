@@ -21,7 +21,7 @@ import {
   encodeCursor,
 } from '../utils/dynamodb-cursor-transformer/dynamodb-cursor-transformer';
 import { MessageConst } from '../constant/message.const';
-import { EnvVariables } from '../../common/const/env-variables.const';
+import { EnvVariables } from '../../infrastructure/config/environment/env-variables.const';
 
 @Injectable()
 export class MessageRepository {
